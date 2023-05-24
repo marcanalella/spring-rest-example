@@ -3,10 +3,10 @@ package com.swagou.test.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class User {
+public class CryptoUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
@@ -15,9 +15,12 @@ public class User {
 
     private String email;
 
+    private String password;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address", referencedColumnName = "address")
-    private UserWallet userWallet;
+    @JoinColumn(name = "crypto_user_wallet_id", referencedColumnName = "id")
+    private CryptoUserWallet cryptoUserWallet;
+
 
     public Long getId() {
         return id;
@@ -51,11 +54,19 @@ public class User {
         this.email = email;
     }
 
-    public UserWallet getUserWallet() {
-        return userWallet;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserWallet(UserWallet userWallet) {
-        this.userWallet = userWallet;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public CryptoUserWallet getCryptoUserWallet() {
+        return cryptoUserWallet;
+    }
+
+    public void setCryptoUserWallet(CryptoUserWallet cryptoUserWallet) {
+        this.cryptoUserWallet = cryptoUserWallet;
     }
 }
