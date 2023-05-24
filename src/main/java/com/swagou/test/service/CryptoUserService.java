@@ -4,7 +4,6 @@ import com.swagou.test.controller.CryptoUserController;
 import com.swagou.test.entity.CryptoUser;
 import com.swagou.test.entity.CryptoUserWallet;
 import com.swagou.test.repository.CryptoUserRepository;
-import com.swagou.test.repository.CryptoUserWalletRepository;
 import com.swagou.test.util.Utils;
 import jakarta.transaction.Transactional;
 import nl.flotsam.xeger.Xeger;
@@ -28,9 +27,6 @@ public class CryptoUserService {
 
     @Autowired
     private CryptoUserRepository cryptoUserRepository;
-
-    @Autowired
-    private CryptoUserWalletRepository cryptoUserWalletRepository;
 
     private final Logger LOGGER = Logger.getLogger(CryptoUserController.class.getName());
 
@@ -95,7 +91,6 @@ public class CryptoUserService {
 
         CryptoUserWallet cryptoUserWallet = new CryptoUserWallet();
         cryptoUserWallet.setAddress(address);
-        cryptoUserWalletRepository.save(cryptoUserWallet);
         cryptoUser.setCryptoUserWallet(cryptoUserWallet);
         cryptoUser.setPassword(BCrypt.hashpw(cryptoUser.getPassword(), BCrypt.gensalt()));
         cryptoUserRepository.save(cryptoUser);
